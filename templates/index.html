@@ -160,10 +160,21 @@
                             `
 
                     wrapper.innerHTML += item
+
+
                     
                                         
                     
                 } 
+                for (var i in list){
+                    var editBtn = document.getElementsByClassName('edit')[i]
+                    editBtn.addEventListener('click',function(){
+                        editItem()
+
+                    })
+
+
+                }
                 
 
 
@@ -192,6 +203,10 @@
 
             })
          })
+
+         function editItem(){
+            console.log('Item Clicked')
+         }
 
          
 
