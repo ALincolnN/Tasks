@@ -120,6 +120,10 @@
         -- CSRF Token          
         
          */
+
+
+        var aciveItem = null
+
         buildList()
 
          function buildList(){
@@ -168,10 +172,12 @@
                 } 
                 for (var i in list){
                     var editBtn = document.getElementsByClassName('edit')[i]
-                    editBtn.addEventListener('click',function(){
-                        editItem()
+                    editBtn.addEventListener('click',(function(item){
+                        return function(){
+                            editItem(item)
+                        }
 
-                    })
+                    })(list[i]))
 
 
                 }
@@ -187,6 +193,13 @@
             console.log('Form Submitted')
 
             var url = 'http://127.0.0.1:8000/api/task-create/'
+
+            if (activeItem != null){
+                var url = `http://127.0.0.1:8000/api/task-update/${activeItem.id}/`
+                aciveItem = null
+
+
+            }
 
             var title = document.getElementById('title').value
 
@@ -204,8 +217,10 @@
             })
          })
 
-         function editItem(){
-            console.log('Item Clicked')
+         function editItem(item){
+            console.log('Item Clicked:',item)
+            activeItem = item
+            document.getElementById('title').value = activeItem.title
          }
 
          
