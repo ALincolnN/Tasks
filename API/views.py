@@ -3,6 +3,7 @@ from django.shortcuts import render,redirect
 from django.http import JsonResponse
 
 from rest_framework.decorators import api_view
+#from django.views.decorators.csrf import csrf_exempt
 from rest_framework.response import Response
 
 from .serializers import TaskSerializer
@@ -61,6 +62,7 @@ def taskUpdate(request,pk):
 
 
 @api_view(['DELETE'])
+#@csrf_exempt
 def taskDelete(request,pk):
     task = Task.objects.get(id=pk)
     task.delete()
